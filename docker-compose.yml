@@ -1,0 +1,34 @@
+version: '3.4'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: CRUD_CLIENTE
+    ports:
+      - "5432:5432"
+    networks:
+      - builders-network
+  crud-cliente:
+    image: crud-cliente
+    restart: always
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    working_dir: /app
+    environment:
+      TZ: America/Sao_paulo
+    ports:
+      - "8080:8080"
+    command: java -jar app.jar
+    links:
+      - db
+    depends_on:
+      - db    
+    networks:
+      - builders-network
+networks:
+  builders-network:
+    driver: bridge
