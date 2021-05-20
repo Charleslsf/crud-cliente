@@ -21,8 +21,8 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 
-	@GetMapping
-	public Page<ClienteDTO> pesquisar(ClienteFilter filtro, @PageableDefault() Pageable pageable) {
+	@GetMapping(produces="application/json")
+	public Page<ClienteDTO> find(ClienteFilter filtro, @PageableDefault() Pageable pageable) {
 		return clienteService.findByFilter(filtro, pageable).map(ClienteDTO::toDTO);
 	}
 

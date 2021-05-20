@@ -1,6 +1,8 @@
 package com.crudCliente.crudCliente.dto;
 
 import com.crudCliente.crudCliente.model.Cliente;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,19 +13,20 @@ import java.time.Period;
 @Getter @Setter
 public class ClienteDTO implements Serializable {
 
-    private Long id;
-
+    @ApiModelProperty(value = "nome", example = "Charles")
     private String nome;
 
+    @ApiModelProperty(value = "cpf", example = "60829891390")
     private String cpf;
 
+    @ApiModelProperty(value = "dataNascimento", example = "1993-08-23")
     private LocalDate dataNascimento;
 
+    @ApiParam(hidden = true)
     private Integer idade;
 
     public static ClienteDTO toDTO(Cliente cliente) {
         ClienteDTO dto = new ClienteDTO();
-        dto.setId(cliente.getId());
         dto.setNome(cliente.getNome());
         dto.setCpf(cliente.getCpf());
         dto.setDataNascimento(cliente.getDataNascimento());
