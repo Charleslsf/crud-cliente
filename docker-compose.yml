@@ -16,8 +16,7 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: app/Dockerfile
-    working_dir: /app
+      dockerfile: Dockerfile
     environment:
       TZ: America/Sao_paulo
     ports:
